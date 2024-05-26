@@ -4,14 +4,12 @@ class CustomContainer extends StatelessWidget {
   final String degree;
   final String location;
   final String weather;
-  final String hldegree;
   final String imagepath;
 
   const CustomContainer({
     super.key,
     required this.degree,
     required this.location,
-    required this.hldegree,
     required this.weather,
     required this.imagepath,
   });
@@ -55,7 +53,7 @@ class CustomContainer extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Row(
+              child: Column(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,9 +67,9 @@ class CustomContainer extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                     const  Padding(
-                            padding:  EdgeInsets.only(bottom: 25),
-                            child:  Icon(
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 25),
+                            child: Icon(
                               Icons.radio_button_unchecked,
                               color: Colors.white,
                               weight: 20,
@@ -80,17 +78,21 @@ class CustomContainer extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      Text(
-                        hldegree,
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                      // Text(
+                      //   hldegree,
+                      //   style: const TextStyle(color: Colors.white),
+                      // )
+                      const SizedBox(height: 20),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             location,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
                           ),
-                          const SizedBox(width: 120),
                           Text(
                             weather,
                             style: const TextStyle(color: Colors.white),
@@ -104,9 +106,9 @@ class CustomContainer extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: -10,
+            right: 4,
             top: -10,
-            child: Image.asset(imagepath, width: 120, height: 120),
+            child: Image.asset(imagepath, width: 100, height: 100),
           ),
         ],
       ),

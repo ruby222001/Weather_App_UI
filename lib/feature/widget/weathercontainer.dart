@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WeatherContainer extends StatelessWidget {
-  final String time;
+  final DateTime time;
   final String weatherimage;
   final String weatherdegree;
   const WeatherContainer({
@@ -35,24 +35,14 @@ class WeatherContainer extends StatelessWidget {
             Color(0xff1C1B33),
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
-        height: 130,
+        height: 150,
         width: 50,
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                time,
-                style: const TextStyle(color: Colors.white),
-              ),
-              const SizedBox(height: 5),
-              Image.asset(weatherimage),
-              const SizedBox(height: 5),
-              Text(
-                weatherdegree,
-                style: const TextStyle(color: Colors.white),
-              ),
+             
             ],
           ),
         ),
