@@ -25,7 +25,7 @@ class BottomNav extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.asset('assets/menu.png'),
+              child: Image.asset('assets/Map.png'),
             ),
             const SizedBox(
               width: 50.0,
@@ -39,7 +39,7 @@ class BottomNav extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.asset('assets/menu.png'),
+              child: Image.asset('assets/List.png'),
             ),
           ],
         ),

@@ -8,7 +8,7 @@ import 'package:weatherapp/config/resources/images.dart';
 import 'package:weatherapp/feature/presentation/intro_page.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:weatherapp/feature/widget/container.dart';
+import 'package:weatherapp/feature/widget/home_container.dart';
 import 'package:weatherapp/feature/widget/search.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,9 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _cityController = TextEditingController();
 
-  static String apikey =
-      '81c3b50a208b46c2afa05611242605'; // Paste Your API Here
-
+  static String apikey = '81c3b50a208b46c2afa05611242605';
   List<Map<String, dynamic>> locationsWeather = [];
   List<String> initialLocations = [
     'London',
@@ -119,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         },
-                        child: Image.asset('assets/left.png')),
+                        child: Image.asset(AppIcons.left)),
                     elevation: 0,
                     title: const Text(
                       'Weather',
@@ -128,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     actions: [
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: Image.asset('assets/rightmenu.png'),
+                        child: Image.asset(AppIcons.rightmenu),
                       ),
                     ]),
                 TextField(
@@ -142,7 +140,15 @@ class _HomePageState extends State<HomePage> {
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search, color: Colors.white54),
-                    hintText: 'Search for a city or airport',
+                    suffixIcon: GestureDetector(
+                        onTap: () {
+                          _cityController.clear();
+                        },
+                        child: const Icon(
+                          Icons.cancel,
+                          color: Colors.white,
+                        )),
+                    hintText: 'Search for a city',
                     hintStyle: const TextStyle(
                       color: Colors.white,
                     ),
