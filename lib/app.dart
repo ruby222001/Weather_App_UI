@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weatherapp/feature/presentation/intro_page.dart';
+import 'package:weatherapp/feature/presentation/home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
-      home: IntroPage(),
+      home: HomePage(),
     );
   }
 }

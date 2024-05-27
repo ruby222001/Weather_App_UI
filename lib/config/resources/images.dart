@@ -1,7 +1,6 @@
 class AppIcons {
   static const clear = 'assets/clear.png';
   static const cloud = 'assets/cloud.png';
-
   static const cloudy = 'assets/cloudy.png';
   static const fog = 'assets/fog.png';
   static const heavycloudy = 'assets/heavycloudy.png';
@@ -14,7 +13,6 @@ class AppIcons {
   static const lightrainshower = 'assets/lightrainshower.png';
   static const list = 'assets/List.png';
   static const map = 'assets/Map.png';
-  static const menu = 'assets/menu.png';
   static const mist = 'assets/mist.png';
   static const moderateorheavyrainshower =
       'assets/moderateorheavyrainshower.png';
@@ -25,9 +23,6 @@ class AppIcons {
       'assets/patchylightrainwiththunder.png';
   static const pathcylightrainpossible = 'assets/pathcylightrainpossible.png';
   static const patchylightrain = 'assets/patchylightrain.png';
-
-  static const pin = 'assets/pin.png';
-  static const profile = 'assets/profile.png';
   static const rightmenu = 'assets/rightmenu.png';
   static const star = 'assets/star.png';
   static const sunny = 'assets/patchylightrainwiththunder.png';

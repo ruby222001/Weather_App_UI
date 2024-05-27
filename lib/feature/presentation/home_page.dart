@@ -1,15 +1,11 @@
-// ignore_for_file: unused_import
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weatherapp/config/resources/images.dart';
-import 'package:weatherapp/feature/presentation/intro_page.dart';
+import 'package:weatherapp/feature/api/api.dart';
+import 'package:weatherapp/feature/presentation/weather_detail.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:weatherapp/feature/widget/home_container.dart';
-import 'package:weatherapp/feature/widget/search.dart';
+import 'package:weatherapp/feature/model/home_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -23,7 +19,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _cityController = TextEditingController();
 
-  static String apikey = '81c3b50a208b46c2afa05611242605';
   List<Map<String, dynamic>> locationsWeather = [];
   List<String> initialLocations = [
     'London',
@@ -34,8 +29,6 @@ class _HomePageState extends State<HomePage> {
   ];
 
   // API Call
-  String searchWeatherAPI =
-      "https://api.weatherapi.com/v1/forecast.json?key=$apikey&days=7&q=";
 
   void fetchWeatherData(String searchText) async {
     try {
@@ -109,16 +102,7 @@ class _HomePageState extends State<HomePage> {
                 AppBar(
                     backgroundColor: Colors.transparent,
                     leading: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const IntroPage(),
-                            ),
-                          );
-                        },
-                        child: Image.asset(AppIcons.left)),
-                    elevation: 0,
+                        onTap: () {}, child: Image.asset(AppIcons.left)),
                     title: const Text(
                       'Weather',
                       style: TextStyle(color: Colors.white),
@@ -169,11 +153,21 @@ class _HomePageState extends State<HomePage> {
                     var weather = locationsWeather[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: CustomContainer(
-                        degree: weather["temperature"].toString(),
-                        location: weather["location"],
-                        weather: weather["currentWeatherStatus"],
-                        imagepath: "assets/" + weather["weatherIcon"],
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WeatherDetailPage(
+                                        weatherData: weather,
+                                      )));
+                        },
+                        child: CustomContainer(
+                          degree: weather["temperature"].toString(),
+                          location: weather["location"],
+                          weather: weather["currentWeatherStatus"],
+                          imagepath: '${"assets/" + weather["weatherIcon"]}',
+                        ),
                       ),
                     );
                   },

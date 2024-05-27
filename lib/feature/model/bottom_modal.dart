@@ -1,83 +1,45 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:weatherapp/feature/api/api.dart';
-import 'package:http/http.dart' as http;
 
 class BottomModal extends StatefulWidget {
-  const BottomModal({super.key});
+  final Map<String, dynamic> weatherData;
+
+  const BottomModal({super.key, required this.weatherData});
 
   @override
   State<BottomModal> createState() => _BottomModalState();
 }
 
 class _BottomModalState extends State<BottomModal> {
-  String location = 'London';
-  String weatherIcon = 'heavycloud.png';
-  int temperature = 0;
-  int windSpeed = 0;
-  int humidity = 0;
-  int cloud = 0;
-  String currentDate = '';
-  List hourlyWeatherForecast = [];
-  List dailyWeatherForecast = [];
-  String currentWeatherStatus = '';
-
-  void fetchWeatherData(String searchText) async {
-    try {
-      var searchResult =
-          await http.get(Uri.parse(searchWeatherAPI + searchText));
-
-      final weatherData = Map<String, dynamic>.from(
-          json.decode(searchResult.body) ?? 'No data');
-      var locationData = weatherData["location"];
-      var currentWeather = weatherData["current"];
-
-      setState(() {
-        location = getShortLocationName(locationData["name"]);
-
-        var parsedDate =
-            DateTime.parse(locationData["localtime"].substring(0, 10));
-        var newDate = DateFormat('MMMMEEEEd').format(parsedDate);
-        currentDate = newDate;
-
-        //updateWeather
-        currentWeatherStatus = currentWeather["condition"]["text"];
-        weatherIcon =
-            "${currentWeatherStatus.replaceAll(' ', '').toLowerCase()}.png";
-        temperature = currentWeather["temp_c"].toInt();
-        windSpeed = currentWeather["wind_kph"].toInt();
-        humidity = currentWeather["humidity"].toInt();
-        cloud = currentWeather["cloud"].toInt();
-
-        //Forecast data
-        dailyWeatherForecast = weatherData["forecast"]["forecastday"];
-        hourlyWeatherForecast = dailyWeatherForecast[0]["hour"];
-        print(dailyWeatherForecast);
-      });
-    } catch (e) {
-      //debugPrint(e);
-    }
-  }
-
-  static String getShortLocationName(String s) {
-    List<String> wordList = s.split(" ");
-    if (wordList.isNotEmpty) {
-      if (wordList.length > 1) {
-        return "${wordList[0]} ${wordList[1]}";
-      } else {
-        return wordList[0];
-      }
-    } else {
-      return " ";
-    }
-  }
+  late String location;
+  late String weatherIcon;
+  late int temperature;
+  late int windSpeed;
+  late int humidity;
+  late int cloud;
+  late String currentDate;
+  late List hourlyWeatherForecast;
+  late List dailyWeatherForecast;
+  late String currentWeatherStatus;
 
   @override
   void initState() {
-    fetchWeatherData(location);
     super.initState();
+    fetchWeatherData(widget.weatherData);
+  }
+
+  void fetchWeatherData(Map<String, dynamic> weatherData) {
+    setState(() {
+      location = weatherData["location"];
+      currentDate = weatherData["currentDate"];
+      currentWeatherStatus = weatherData["currentWeatherStatus"];
+      weatherIcon = weatherData["weatherIcon"];
+      temperature = weatherData["temperature"];
+      windSpeed = weatherData["windSpeed"];
+      humidity = weatherData["humidity"];
+      cloud = weatherData["cloud"];
+      dailyWeatherForecast = weatherData["dailyWeatherForecast"];
+      hourlyWeatherForecast = weatherData["hourlyWeatherForecast"];
+    });
   }
 
   @override
